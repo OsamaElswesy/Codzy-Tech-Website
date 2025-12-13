@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="images/Artboard 13.png">
+    <title>Our Courses | Codzy Tech</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/data.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/main.js"></script>
+</head>
+
+<body class="bg-gray-50 text-dark antialiased pt-20">
+
+    <div class="bg-dark text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4" data-i18n="courses.title">Explore Our Tracks</h1>
+            <p class="text-gray-400 text-lg max-w-2xl mx-auto" data-i18n="courses.subtitle">
+                Pathways designed for every stage of the journey. From first steps in logic to mastering artificial
+                intelligence.
+            </p>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-20">
+
+        <!-- Kids Section -->
+        <section id="kids">
+            <div class="flex items-center gap-4 mb-10">
+                <div class="p-3 bg-blue-100 text-primary rounded-xl">
+                    <i data-lucide="gamepad-2" class="w-8 h-8"></i>
+                </div>
+                <div>
+                    <h2 class="text-3xl font-bold" data-i18n="courses.kids.title">Kids & Teens</h2>
+                    <p class="text-gray-500" data-i18n="courses.kids.desc">Ages 12-18 • Game Dev • Logic • Python</p>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="kids-grid">
+                <!-- Injected via JS -->
+            </div>
+        </section>
+
+        <!-- Pro Section -->
+        <section id="pro">
+            <div class="flex items-center gap-4 mb-10">
+                <div class="p-3 bg-green-100 text-green-600 rounded-xl">
+                    <i data-lucide="briefcase" class="w-8 h-8"></i>
+                </div>
+                <div>
+                    <h2 class="text-3xl font-bold" data-i18n="courses.pro.title">Students & Professionals</h2>
+                    <p class="text-gray-500" data-i18n="courses.pro.desc">Career Tracks • Certification • Portfolio
+                        Building</p>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="pro-grid">
+                <!-- Injected via JS -->
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        function createCard(course, lang) {
+            const isAr = lang === 'ar';
+            const title = isAr ? course.title_ar : course.title;
+            const description = isAr ? course.description_ar : course.description;
+            const duration = isAr ? course.duration_ar : course.duration;
+            const projects = isAr ? course.projects_ar : course.projects;
+            const viewDetails = isAr ? 'التفاصيل' : 'View Details';
+            const level = isAr ? course.level_ar : course.level;
+
+            return `
+                <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all border border-gray-100 flex flex-col h-full group">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="p-3 bg-gray-50 rounded-xl text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                            <i data-lucide="${course.icon || 'code'}" class="w-6 h-6"></i>
+                        </div>
+                        <span class="text-xs font-bold px-3 py-1 bg-blue-50 text-blue-600 rounded-full">${duration}</span>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold mb-3 group-hover:text-primary transition-colors">${title}</h3>
+                    <p class="text-gray-500 text-sm mb-6 flex-grow leading-relaxed">${description}</p>
+                    
+                    <div class="pt-6 border-t border-gray-100 mt-auto">
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            ${projects.slice(0, 2).map(p => `<span class="text-xs bg-gray-50 px-2 py-1 rounded text-gray-600">${p}</span>`).join('')}
+                        </div>
+                        <a href="course-detail.html?id=${course.id}" class="block w-full text-center py-3 border-2 border-primary text-primary font-bold rounded-xl hover:bg-primary hover:text-white transition-all">
+                            ${viewDetails}
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const kidsContainer = document.getElementById('kids-grid');
+            const proContainer = document.getElementById('pro-grid');
+            const lang = localStorage.getItem('lang') || 'en';
+
+            if (typeof coursesData !== 'undefined') {
+                kidsContainer.innerHTML = coursesData.kids.map(c => createCard(c, lang)).join('');
+                proContainer.innerHTML = coursesData.pro.map(c => createCard(c, lang)).join('');
+                lucide.createIcons();
+            }
+        });
+    </script>
+</body>
+
+</html>

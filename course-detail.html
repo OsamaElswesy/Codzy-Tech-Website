@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="images/Artboard 13.png">
+    <title>Course Details | Codzy Tech</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/data.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/main.js"></script>
+</head>
+
+<body class="bg-gray-50 text-dark antialiased pt-20">
+
+    <div id="course-content" class="min-h-screen">
+        <!-- Content injected here -->
+    </div>
+
+    <!-- Sticky Mobile CTA -->
+    <div
+        class="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 p-4 md:hidden z-40 flex gap-3 shadow-[0_-5px_20px_rgba(0,0,0,0.05)]">
+        <a href="https://wa.me/+201035572710"
+            class="flex-1 bg-green-500 text-white font-bold py-3 rounded-lg flex items-center justify-center gap-2">
+            <i data-lucide="message-circle" class="w-5 h-5"></i> WhatsApp
+        </a>
+        <a href="contact.html"
+            class="flex-1 bg-primary text-white font-bold py-3 rounded-lg flex items-center justify-center">
+            Enroll Now
+        </a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const courseId = params.get('id');
+            const lang = localStorage.getItem('lang') || 'en';
+            const isAr = lang === 'ar';
+            const t = translations[lang];
+
+            // Find course in either category
+            let course = null;
+            if (coursesData) {
+                course = coursesData.kids.find(c => c.id === courseId) || coursesData.pro.find(c => c.id === courseId);
+            }
+
+            const container = document.getElementById('course-content');
+
+            if (!course) {
+                container.innerHTML = `
+                    <div class="flex flex-col items-center justify-center h-[60vh] text-center px-4">
+                        <i data-lucide="alert-circle" class="w-16 h-16 text-gray-300 mb-4"></i>
+                        <h1 class="text-3xl font-bold text-gray-800 mb-2">Course Not Found</h1>
+                        <p class="text-gray-500 mb-6">The course you are looking for does not exist.</p>
+                        <a href="courses.html" class="px-6 py-2 bg-primary text-white rounded-lg">Return to Courses</a>
+                    </div>
+                `;
+                lucide.createIcons();
+                return;
+            }
+
+            // Prepare Data
+            const title = isAr ? course.title_ar : course.title;
+            const description = isAr ? course.description_ar : course.description;
+            const category = course.category; // Categories might need translation if strictly required, but for now kept common or map if needed.
+            const duration = isAr ? course.duration_ar : course.duration;
+            const level = isAr ? course.level_ar : course.level;
+            const outcomes = isAr ? course.outcomes_ar : course.outcomes;
+            const curriculum = isAr ? course.curriculum_ar : course.curriculum;
+            const projects = isAr ? course.projects_ar : course.projects;
+
+            // Render Course
+            document.title = `${title} | Codzy Tech`;
+
+            container.innerHTML = `
+                <!-- Course Hero -->
+                <div class="bg-dark text-white relative overflow-hidden">
+                    <div class="absolute right-0 top-0 w-1/2 h-full bg-primary/10 blur-3xl rounded-full translate-x-1/2 -translate-y-1/2"></div>
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-secondary text-sm font-bold mb-6 border border-white/10">
+                            ${category}
+                        </div>
+                        <h1 class="text-4xl md:text-6xl font-bold mb-6">${title}</h1>
+                        <p class="text-xl text-gray-300 max-w-2xl leading-relaxed mb-8">${description}</p>
+                        
+                        <div class="flex flex-wrap gap-6 text-sm font-medium text-gray-300">
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="clock" class="w-5 h-5 text-secondary"></i> ${duration}
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="bar-chart" class="w-5 h-5 text-secondary"></i> ${level}
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="award" class="w-5 h-5 text-secondary"></i> ${isAr ? 'شهادة معتمدة' : 'Certification Included'}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                    <div class="grid lg:grid-cols-3 gap-12">
+                        
+                        <!-- Main Content -->
+                        <div class="lg:col-span-2 space-y-12">
+                            
+                            <!-- Outcomes -->
+                            <section class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm">
+                                <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                                    <i data-lucide="target" class="w-6 h-6 text-primary"></i> ${t['detail.outcomes']}
+                                </h2>
+                                <div class="grid sm:grid-cols-2 gap-4">
+                                    ${outcomes.map(item => `
+                                        <div class="flex items-start gap-3">
+                                            <i data-lucide="check" class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0"></i>
+                                            <span class="text-gray-600">${item}</span>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </section>
+
+                            <!-- Curriculum -->
+                            <section>
+                                <h2 class="text-2xl font-bold mb-8 flex items-center gap-3">
+                                    <i data-lucide="book-open" class="w-6 h-6 text-primary"></i> ${t['detail.curriculum']}
+                                </h2>
+                                <div class="space-y-4">
+                                    ${curriculum.map((item, index) => `
+                                        <div class="bg-white rounded-xl p-6 border border-gray-100 shadow-sm flex gap-4 transition-all hover:border-primary/20">
+                                            <div class="flex-shrink-0 w-10 h-10 bg-blue-50 text-primary font-bold rounded-lg flex items-center justify-center border border-blue-100">
+                                                ${index + 1}
+                                            </div>
+                                            <div>
+                                                <h3 class="font-bold text-gray-800 text-lg mb-1">${item}</h3>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </section>
+
+                            <!-- Projects -->
+                            <section>
+                                <h2 class="text-2xl font-bold mb-8 flex items-center gap-3">
+                                    <i data-lucide="code-2" class="w-6 h-6 text-primary"></i> ${t['detail.projects']}
+                                </h2>
+                                <div class="grid sm:grid-cols-2 gap-6">
+                                    ${projects.map(project => `
+                                        <div class="bg-dark text-white p-6 rounded-xl relative overflow-hidden group">
+                                            <div class="absolute right-0 top-0 w-32 h-32 bg-secondary/10 rounded-full blur-2xl -mr-10 -mt-10 transition-all group-hover:bg-secondary/20"></div>
+                                            <i data-lucide="layers" class="w-8 h-8 text-secondary mb-4"></i>
+                                            <h3 class="font-bold text-lg mb-2">${project}</h3>
+                                            <p class="text-gray-400 text-sm">${isAr ? 'مشروع كامل جاهز لمعرض الأعمال' : 'Full portfolio-ready project built by you.'}</p>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </section>
+
+                        </div>
+
+                        <!-- Sidebar -->
+                        <div class="lg:col-span-1">
+                            <div class="sticky top-24 space-y-6">
+                                <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-lg">
+                                    <div class="text-3xl font-bold text-primary mb-2">${t['detail.enrol']}</div>
+                                    <p class="text-gray-500 mb-8 text-sm">${isAr ? 'مقاعد محدودة للدفعة القادمة.' : 'Limited seats available for next intake.'}</p>
+                                    
+                                    <div class="space-y-4">
+                                        <a href="contact.html" class="w-full block text-center bg-secondary text-dark font-bold py-4 rounded-xl hover:bg-green-400 transition-all shadow-lg">
+                                            ${t['nav.cta']}
+                                        </a>
+                                        <a href="https://wa.me/+201035572710" class="w-full block text-center bg-gray-100 text-gray-700 font-bold py-4 rounded-xl hover:bg-gray-200 transition-all flex items-center justify-center gap-2">
+                                            <i data-lucide="message-circle" class="w-5 h-5"></i> ${t['detail.whatsapp']}
+                                        </a>
+                                    </div>
+
+                                    <div class="mt-8 pt-6 border-t border-gray-100">
+                                        <div class="flex items-center gap-4 mb-4">
+                                            <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 font-bold text-xs">IMG</div>
+                                            <div>
+                                                <div class="font-bold text-sm">${t['stats.mentors']}</div>
+                                                <div class="text-xs text-gray-500">Senior Engineers</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bg-blue-50 rounded-2xl p-6 border border-blue-100">
+                                    <h4 class="font-bold text-blue-900 mb-2 flex items-center gap-2">
+                                        <i data-lucide="shield-check" class="w-5 h-5"></i>
+                                        Guarantee
+                                    </h4>
+                                    <p class="text-sm text-blue-800">
+                                        ${isAr ? 'إذا لم تكن راضيًا بعد أول حصة، نضمن لك استرداد المبلغ بالكامل.' : 'If you aren\'t satisfied after the first session, we offer a full refund. No questions asked.'}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            `;
+
+            // Re-init icons
+            lucide.createIcons();
+        });
+    </script>
+</body>
+
+</html>
