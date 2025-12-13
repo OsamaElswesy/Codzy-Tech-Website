@@ -29,7 +29,7 @@ function renderHeader() {
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
                     <a href="index.html" class="flex items-center gap-2">
-                        <img src="images/Artboard 14.png" alt="Codzy Tech Logo" class="h-10 w-auto object-contain">
+                        <img src="images/Icon.png" alt="Codzy Tech Logo" class="h-10 w-auto object-contain">
                         <span class="font-bold text-xl tracking-tight">Codzy Tech</span>
                     </a>
                 </div>
@@ -114,7 +114,7 @@ function renderFooter() {
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
                 <div class="col-span-1 md:col-span-1">
                     <div class="flex items-center gap-2 mb-6">
-                        <img src="images/Artboard 14.png" alt="Codzy Tech Logo" class="h-8 w-auto object-contain">
+                        <img src="images/Icon.png" alt="Codzy Tech Logo" class="h-8 w-auto object-contain">
                         <span class="font-bold text-xl tracking-tight">Codzy Tech</span>
                     </div>
                     <p class="text-white text-sm leading-relaxed mb-6" data-i18n="footer.slogan">
