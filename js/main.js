@@ -36,9 +36,9 @@ function renderHeader() {
 
                 <!-- Desktop Menu -->
                 <nav class="hidden md:flex space-x-8 items-center">
-                    <a href="index.html" class="text-gray-300 hover:text-secondary font-medium transition-colors" data-i18n="nav.home">Home</a>
+                    <a href="index.html" class="text-white hover:text-secondary font-medium transition-colors" data-i18n="nav.home">Home</a>
                     <div class="relative group">
-                        <a href="courses.html" class="text-gray-300 hover:text-secondary font-medium transition-colors flex items-center gap-1">
+                        <a href="courses.html" class="text-white hover:text-secondary font-medium transition-colors flex items-center gap-1">
                             <span data-i18n="nav.courses">Courses</span> <i data-lucide="chevron-down" class="w-4 h-4"></i>
                         </a>
                         <!-- Dropdown -->
@@ -48,8 +48,8 @@ function renderHeader() {
                             <a href="courses.html#pro" class="block px-4 py-2 text-gray-800 hover:bg-gray-50 hover:text-primary">Students & Professionals</a>
                         </div>
                     </div>
-                    <a href="about.html" class="text-gray-300 hover:text-secondary font-medium transition-colors" data-i18n="nav.about">About</a>
-                    <a href="instructors.html" class="text-gray-300 hover:text-secondary font-medium transition-colors" data-i18n="nav.instructors">Instructors</a>
+                    <a href="about.html" class="text-white hover:text-secondary font-medium transition-colors" data-i18n="nav.about">About</a>
+                    <a href="instructors.html" class="text-white hover:text-secondary font-medium transition-colors" data-i18n="nav.instructors">Instructors</a>
                     
                     <!-- Lang Switcher -->
                     <button onclick="toggleLanguage()" class="flex items-center gap-1 text-gray-300 hover:text-white font-medium transition-colors border border-white/20 px-3 py-1 rounded-full text-sm">
@@ -117,7 +117,7 @@ function renderFooter() {
                         <img src="images/Artboard 14.png" alt="Codzy Tech Logo" class="h-8 w-auto object-contain">
                         <span class="font-bold text-xl tracking-tight">Codzy Tech</span>
                     </div>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-6" data-i18n="footer.slogan">
+                    <p class="text-white text-sm leading-relaxed mb-6" data-i18n="footer.slogan">
                         Empowering the next generation of innovators with future-ready tech skills. From first lines of code to professional mastery.
                     </p>
                     <div class="flex space-x-4">
@@ -130,7 +130,7 @@ function renderFooter() {
 
                 <div>
                     <h3 class="text-lg font-bold mb-6 text-white" data-i18n="footer.programs">Programs</h3>
-                    <ul class="space-y-4 text-gray-400 text-sm">
+                    <ul class="space-y-4 text-white text-sm">
                         <li><a href="courses.html#kids" class="hover:text-secondary transition-colors">Kids Coding (12-14)</a></li>
                         <li><a href="courses.html#kids" class="hover:text-secondary transition-colors">Teens Python (15-18)</a></li>
                         <li><a href="courses.html#pro" class="hover:text-secondary transition-colors">Pro Web Development</a></li>
@@ -140,7 +140,7 @@ function renderFooter() {
 
                 <div>
                     <h3 class="text-lg font-bold mb-6 text-white" data-i18n="footer.academy">Academy</h3>
-                    <ul class="space-y-4 text-gray-400 text-sm">
+                    <ul class="space-y-4 text-white text-sm">
                         <li><a href="about.html" class="hover:text-secondary transition-colors">Our Story</a></li>
                         <li><a href="instructors.html" class="hover:text-secondary transition-colors">Instructors</a></li>
                         <li><a href="success.html" class="hover:text-secondary transition-colors">Success Stories</a></li>
@@ -150,7 +150,7 @@ function renderFooter() {
 
                 <div>
                     <h3 class="text-lg font-bold mb-6 text-white" data-i18n="footer.contact">Contact</h3>
-                    <ul class="space-y-4 text-gray-400 text-sm">
+                    <ul class="space-y-4 text-white text-sm">
                         <li class="flex items-start gap-3">
                             <i data-lucide="map-pin" class="w-5 h-5 text-primary mt-0.5"></i>
                             <span>New Adminstrative Capital, New Cairo<br>Egypt</span>
@@ -167,7 +167,7 @@ function renderFooter() {
                 </div>
             </div>
 
-            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-white">
                 <p>&copy; 2025 Codzy Tech. All rights reserved.</p>
                 <div class="flex space-x-6 mt-4 md:mt-0">
                     <a href="#" class="hover:text-white transition-colors" data-i18n="footer.privacy">Privacy Policy</a>
